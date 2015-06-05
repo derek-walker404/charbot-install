@@ -93,7 +93,6 @@ public class InstallMain {
 	}
 	
 	public static void main(String[] args) {
-//		App.getContext().getBean(InstallMain.class).installDeviceCredentials();
-		System.out.println(App.getContext().getBean(InstallMain.class).getJobSchedules());
+		App.getContext().getBean(InstallMain.class).installDeviceCredentials();
 	}
 }
