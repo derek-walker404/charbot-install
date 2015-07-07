@@ -7,7 +7,7 @@
 	<name>charbot-install</name>
 	<description>Charbot Installation</description>
 	<properties>
-		<charbox-domain.version>0.1.0-SNAPSHOT</charbox-domain.version>
+		<charbox-domain.version>0.1.1-SNAPSHOT</charbox-domain.version>
 	</properties>
 	<dependencies>
 		<dependency>

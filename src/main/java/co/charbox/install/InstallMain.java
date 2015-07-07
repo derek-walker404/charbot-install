@@ -33,7 +33,7 @@ public class InstallMain {
 		DeviceAuthModel newAuth = getNewAuth(serviceId, serviceApiKey, serviceGroup);
 		if (newAuth != null && registerDevice(newAuth)) {
 			config.setProperty("device.id", newAuth.getDeviceId());
-			config.setProperty("device.api.key", newAuth.getApiKey());
+			config.setProperty("device.api.key", newAuth.getKey());
 			config.setProperty("install.service.id", "");
 			config.setProperty("install.service.apikey", "");
 			config.setProperty("install.service.group", "");
@@ -61,7 +61,7 @@ public class InstallMain {
 	
 	protected boolean registerDevice(DeviceAuthModel auth) {
 		PostMethod pm = new PostMethod(config.getString("charbot.api.uri", "http://localhost:8080") + "/devices/id/" + auth.getDeviceId() + "/register");
-		pm.addRequestHeader(new AuthorizationHeader(auth.getDeviceId(), auth.getApiKey()));
+		pm.addRequestHeader(new AuthorizationHeader(auth.getDeviceId(), auth.getKey()));
 		try {
 			return 200 == httpClientProvider.get().executeMethod(pm);
 		} catch (IOException e) {
