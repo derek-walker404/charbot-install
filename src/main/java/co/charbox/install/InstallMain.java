@@ -45,7 +45,7 @@ public class InstallMain {
 	}
 	
 	protected DeviceAuthModel getNewAuth(String serviceId, String serviceApiKey, String serviceGroup) {
-		PostMethod pm = new PostMethod(config.getString("charbot.api.uri", "http://localhost:8080") + "/install");
+		PostMethod pm = new PostMethod(config.getString("charbot.api.url", "http://localhost:8080") + "/install");
 		pm.addRequestHeader(new AuthorizationHeader(serviceId, serviceApiKey, serviceGroup));
 		try {
 			if (200 == httpClientProvider.get().executeMethod(pm)) {
@@ -60,7 +60,7 @@ public class InstallMain {
 	}
 	
 	protected boolean registerDevice(DeviceAuthModel auth) {
-		PostMethod pm = new PostMethod(config.getString("charbot.api.uri", "http://localhost:8080") + "/devices/id/" + auth.getDeviceId() + "/register");
+		PostMethod pm = new PostMethod(config.getString("charbot.api.url", "http://localhost:8080") + "/devices/id/" + auth.getDeviceId() + "/register");
 		pm.addRequestHeader(new AuthorizationHeader(auth.getDeviceId(), auth.getKey()));
 		try {
 			return 200 == httpClientProvider.get().executeMethod(pm);
@@ -74,7 +74,7 @@ public class InstallMain {
 	
 	protected Map<String, String> getJobSchedules() {
 		Map<String, String> schedules = Maps.newHashMap();
-		PostMethod pm = new PostMethod(config.getString("charbot.api.uri", "http://localhost:8080") + "/schedules");
+		PostMethod pm = new PostMethod(config.getString("charbot.api.url", "http://localhost:8080") + "/schedules");
 		try {
 			if (200 == httpClientProvider.get().executeMethod(pm)) {
 				JsonNode node = json.toJsonNodeFromResponse(pm.getResponseBodyAsString()).get("data");
