@@ -1,8 +1,5 @@
 #!/bin/bash
 
-./clean.sh > install.log
-
-wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client/app.properties &>> install.log
 wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client/charbot-install-0.1.0-SNAPSHOT.jar &>> install.log
 wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client/charbox-client-0.1.3-SNAPSHOT.jar &>> install.log
 
