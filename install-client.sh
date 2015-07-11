@@ -6,9 +6,6 @@ wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client
 wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client/charbot-install-0.1.0-SNAPSHOT.jar &>> install.log
 wget --no-check-certificate https://s3-us-west-1.amazonaws.com/charbot-dl/client/charbox-client-0.1.3-SNAPSHOT.jar &>> install.log
 
-./install-client.sh
-rm install-client.sh
-
 java -jar charbot-install-0.1.0-SNAPSHOT.jar &>> install.log
 
 rm charbot-install-0.1.0-SNAPSHOT.jar
