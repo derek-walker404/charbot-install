@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,7 @@ import com.tpofof.core.utils.Config;
 import com.tpofof.core.utils.HttpClientProvider;
 import com.tpofof.core.utils.json.JsonUtils;
 
+@Slf4j
 @Component
 public class InstallMain {
 
@@ -45,11 +48,16 @@ public class InstallMain {
 	}
 	
 	protected DeviceAuthModel getNewAuth(String serviceId, String serviceApiKey, String serviceGroup) {
-		PostMethod pm = new PostMethod(config.getString("charbot.api.url", "http://localhost:8080") + "/install");
+		String uri = config.getString("charbot.api.url", "http://localhost:8080") + "/install";
+		log.debug("New Auth Url: " + uri);
+		PostMethod pm = new PostMethod(uri);
 		pm.addRequestHeader(new AuthorizationHeader(serviceId, serviceApiKey, serviceGroup));
 		try {
-			if (200 == httpClientProvider.get().executeMethod(pm)) {
+			int status = httpClientProvider.get().executeMethod(pm);
+			if (200 == status) {
 				return json.fromJsonResponse(pm.getResponseBodyAsString(), DeviceAuthModel.class);
+			} else {
+				log.error("New Auth Error. Status: " + status);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
